@@ -287,7 +287,7 @@ double boundt(int n, int c, double lambda) {
 }
 
 void run1() {
-    ofstream file("data1.csv");
+    ofstream file("plot1.csv");
     if (!file.is_open()) return;
 
     vector<BallsInBins*> sims = vector<BallsInBins*>(10);
@@ -311,18 +311,18 @@ void run1() {
     //Concatenate all data
     file << "m(c);lambda=3/4;ln(4)/c+1;4ln(4)+6c;lambda=1023/1024;ln(1024)/c+1;4ln(1024)+6c" << endl; //header
     for (int i = 0; i < 5; ++i) {
-        file << to_string(i) << ";"
+        file << to_string(i+1) << ";"
              << to_string(avgs[i][1]) << ";"
-             << to_string(boundm1(i,0.75)) << ";"
-             << to_string(boundm2(i,0.75)) << ";"
+             << to_string(boundm1(i+1,0.75)) << ";"
+             << to_string(boundm2(i+1,0.75)) << ";"
              << to_string(avgs[5+i][1]) << ";"
-             << to_string(boundm1(i,1023.0/1024.0)) << ";"
-             << to_string(boundm2(i,1023.0/1024.0)) << endl;
+             << to_string(boundm1(i+1,1023.0/1024.0)) << ";"
+             << to_string(boundm2(i+1,1023.0/1024.0)) << endl;
     }
 }
 
 void run2() {
-    ofstream file("data2.csv");
+    ofstream file("plot2.csv");
     if (!file.is_open()) return;
 
     vector<BallsInBins*> sims = vector<BallsInBins*>(20);
@@ -352,7 +352,7 @@ void run2() {
 }
 
 void run3() {
-    ofstream file("data3.csv");
+    ofstream file("plot3.csv");
     if (!file.is_open()) return;
 
     vector<BallsInBins*> sims = vector<BallsInBins*>(15);
@@ -380,23 +380,23 @@ void run3() {
     }
 
     //Concatenate all data
-    file << "tau(c);max(3/4);avg(3/4);max(1023/1024);max(8191/8192);avg(8191/8192);bound(4);bound(1024);bound(8192)" << endl; //header
+    file << "tau(c);max(3/4);avg(3/4);max(1023/1024);avg(1023/1024);avg(8191/8192);max(8191/8192);bound(4);bound(1024);bound(8192)" << endl; //header
     for (int i = 0; i < 5; ++i) {
-        file << to_string(i) << ";"
+        file << to_string(i+1) << ";"
              << to_string(avgs[i][3]) << ";"
-             << to_string(avgs[5][4]) << ";"
+             << to_string(avgs[i][4]) << ";"
              << to_string(avgs[5+i][3]) << ";"
              << to_string(avgs[5+i][4]) << ";"
              << to_string(avgs[10+i][3]) << ";"
              << to_string(avgs[10+i][4]) << ";"
-             << to_string(boundt(32768,i,0.75)) << ";"
-             << to_string(boundt(32768,i,1023.0/1024.0)) << ";"
-             << to_string(boundt(32768,i,8191.0/8192.0)) << endl;
+             << to_string(boundt(32768,i+1,0.75)) << ";"
+             << to_string(boundt(32768,i+1,1023.0/1024.0)) << ";"
+             << to_string(boundt(32768,i+1,8191.0/8192.0)) << endl;
     }
 }
 
 void run4() {
-    ofstream file("data4.csv");
+    ofstream file("plot4.csv");
     if (!file.is_open()) return;
 
     vector<BallsInBins*> sims = vector<BallsInBins*>(20);
@@ -418,7 +418,7 @@ void run4() {
     double x = 1;
     for (int i = 0; i < 10; ++i) {
         x *= 2;
-        file << to_string(1.0-1.0/x)
+        file << to_string(1.0-1.0/x) << ";"
              << to_string(avgs[i][3]) << ";"
              << to_string(avgs[i][4]) << ";"
              << to_string(avgs[10+i][3]) << ";"
