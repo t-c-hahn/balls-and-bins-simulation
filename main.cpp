@@ -154,7 +154,7 @@ bool BallsInBins::update() {
     takeSnapshot();
     //cout << "snapshot" << endl;
     //return b;
-    return t<1003;
+    return t<11000;
 }
 
 void BallsInBins::deleteBalls() {
