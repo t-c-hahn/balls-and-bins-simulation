@@ -283,7 +283,7 @@ double boundm2(int c, double lambda) {
 
 //theoretical bound
 double boundt(int n, int c, double lambda) {
-    return log2(log2(n)) + c + log(1.0/(1.0-lambda));
+    return log2(log2(n)) + c + log(1.0/(1.0-lambda))/c;
 }
 
 void run1() {
@@ -437,3 +437,4 @@ int main()
     run4();
     return 0;
 }
+
