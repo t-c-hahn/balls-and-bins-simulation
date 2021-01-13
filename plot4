@@ -1,0 +1,68 @@
+#!/bin/bash
+
+gnuplot <<'EOF'
+
+set style line 11 lc rgb '#808080' lt 1
+set border 3 back ls 11
+set tics nomirror out scale 0.75
+set arrow from graph 1,0 to graph 1.05,0 size screen 0.025,15,60 filled ls 11
+set arrow from graph 0,1 to graph 0,1.05 size screen 0.025,15,60 filled ls 11
+
+set style line 12 lc rgb'#808080' lt 0 lw 1
+set grid back ls 12
+set datafile separator "|"
+set key left top
+
+#set lmargin at screen 0.2
+set bmargin at screen 0.2
+set rmargin at screen 0.95
+set tmargin at screen 0.95
+
+set style line 1 lc rgb '#0080f0' lt 8 pt 7 ps 1 lw 2 dt "- "
+set style line 11 lc rgb '#0080f0' lt 8 pt 9 ps 1 lw 2 dt "- "
+set style line 2 lc rgb '#d02020' lt 8 pt 7 ps 1 lw 2 dt "- "
+set style line 21 lc rgb '#d02020' lt 8 pt 9 ps 1 lw 2 dt "- "
+set style line 3 lc rgb '#f08000' lt 8 pt 7 ps 1 lw 2 dt "- "
+set style line 31 lc rgb '#f08000' lt 8 pt 9 ps 1 lw 2 dt "- "
+set style line 4 lc rgb '#20d020' lt 3 pt 7 ps 1 lw 2 dt "- "
+set style line 5 lc rgb '#c0c0c0' lt 3 pt 7 ps 1 lw 2 dt "- "
+set style line 6 lc rgb '#a020ff' lt 3 pt 7 ps 1 lw 2 dt "- "
+set style line 7 lc rgb '#ff20a0' lt 3 pt 7 ps 1 lw 2 dt "- "
+set style line 8 lc rgb '#000000' lt 3 pt 7 ps 1 lw 2 dt "- "
+
+set style line 10 lc rgb '#0080f0' lt 1 pt 7 ps 2 lw 0
+set style line 20 lc rgb '#d02020' lt 1 pt 7 ps 2 lw 0
+set style line 30 lc rgb '#f08000' lt 1 pt 7 ps 2 lw 0
+set style line 40 lc rgb '#20d020' lt 1 pt 7 ps 2 lw 0
+set style line 50 lc rgb '#c0c0c0' lt 1 pt 7 ps 2 lw 0
+set style line 60 lc rgb '#a020ff' lt 1 pt 7 ps 2 lw 0
+set style line 70 lc rgb '#ff20a0' lt 1 pt 7 ps 2 lw 0
+set style line 80 lc rgb '#000000' lt 1 pt 7 ps 2 lw 0
+
+set title ''
+
+set output "plot4.tex"
+#set terminal pdf color enhanced size 3in,2in
+set terminal epslatex size 3.4in,1.8in
+
+set datafile separator ";" 
+
+set xrange [1 to 10]
+set xtics ("$1-2^{-1}$" 1, "$1-2^{-2}$" 2, "$1-2^{-3}$" 3, "$1-2^{-4}$" 4, "$1-2^{-5}$" 5, "$1-2^{-6}$" 6, "$1-2^{-7}$" 7, "$1-2^{-8}$" 8, "$1-2^{-9}$" 9, "$1-2^{-10}$" 10)
+
+set xlabel 'generation rate $\lambda$'
+set ylabel 'waiting time' offset 1,0
+
+set key left top
+
+plot \
+1/0 w p t "\\small $c=1$" ls 10,\
+1/0 w p t "\\small $c=3$" ls 20,\
+"plot4.csv" using ($2) w p ls 1 t "", \
+"plot4.csv" using ($3) w p ls 11 t "", \
+"plot4.csv" using ($4) w p ls 2 t "", \
+"plot4.csv" using ($5) w p ls 21 t "", \
+"plot4.csv" using ($6) w l ls 1 t "", \
+"plot4.csv" using ($7) w l ls 2 t "";
+
+EOF
