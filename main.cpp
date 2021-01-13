@@ -154,7 +154,7 @@ bool BallsInBins::update() {
     takeSnapshot();
     //cout << "snapshot" << endl;
     //return b;
-    return t<11000;
+    return t<2000;
 }
 
 void BallsInBins::deleteBalls() {
@@ -261,7 +261,7 @@ void BallsInBins::takeSnapshot() {
 
 vector<double> average(Snapshot snapshot) {
     int length = 1000;
-    //averaging over all rounds > length
+    //averaging over last length rounds
     vector<double> avg = vector<double>(snapshot[snapshot.size()-length].size(),0);
     for (int t=snapshot.size()-length; t < snapshot.size(); ++t) {
         for (int i=0; i<snapshot[t].size(); ++i) {
